@@ -1,7 +1,3 @@
-`👀𝐘𝐓 𝐒𝐎𝐍𝐃 𝐃𝐋 𝐏𝐋𝐔𝐆𝐈𝐍🥲`
-> ᴄʀᴇᴀᴛᴇ ʙʏ ᴍʀ ʟᴀᴋɪʏᴀ
-> ᴘʟᴇᴀꜱᴇ ꜱʜᴀʀᴇ 
-
 const { cmd, commands } = require('../lib/command');
 const yts = require('yt-search');
 const { fetchJson } = require('../lib/functions');
@@ -155,5 +151,3 @@ const sentMsg = await conn.sendMessage(from, {
         reply(`${e}`);
     }
 });
-
-> 𝛲𝛩𝑊𝛯𝑅𝐷 𝐵𝑌 𝐿𝛥𝛫𝛪𝑌𝛥 𝛭𝐷
