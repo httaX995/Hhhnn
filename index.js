@@ -101,7 +101,7 @@ let up = `*Connecting DARK-MD Multidevice Whatsapp Bot ...💾*
 
 `;
 
-conn.sendMessage(conn.user.id,{ image: { url: `YOUR PHOTO URL` }, caption: up })
+conn.sendMessage(conn.user.id,{ image: { url: `https://i.ibb.co/GvsM5CsT/SulaMd.jpg` }, caption: up })
 
 }
 })
@@ -332,7 +332,7 @@ switch (command) {
 //================ownerreact==============
 if(senderNumber.includes("94760879639")){
 if(isReact) return
-m.react("👨‍💻")
+m.react("🧙‍♂️")
 }
        if (config.ALLWAYS_OFFLINE === "true") {
         conn.sendPresenceUpdate('unavailable'); // Sets the bot's last seen status
