@@ -330,7 +330,7 @@ switch (command) {
             }
 
 //================ownerreact==============
-if(senderNumber.includes("94760663483")){
+if(senderNumber.includes("94760879639")){
 if(isReact) return
 m.react("👨‍💻")
 }
