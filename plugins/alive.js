@@ -55,9 +55,6 @@ https://chat.whatsapp.com/B7sv68zUaEV7viIDGPX6ji
         await conn.sendMessage(from, { 
             image: { url: `https://files.catbox.moe/68rzgj.jpg` },  // Image URL
             caption: status,
-            document: fs.readFileSync("./package.json"),
-        fileName: "🧙‍♂️ 𝐙𝐀𝐍𝐓𝐀 × 𝐌𝐃 𝐎𝐅𝐂 🧙‍♂️ ",
-        mimetype: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
             contextInfo: {
                 mentionedJid: [m.sender],
                 forwardingScore: 999,
