@@ -1,7 +1,7 @@
 {
-  "name": "BUNNY-MD",
-  "description": "Javascript WhatsApp bot made by MRNIKO|HANSAMALA|RASMIKA",
-  "logo": "https://github.com/NIKO-PAMIYA/Img/blob/main/20241104_154500.jpg?raw=true",
+  "name": "ASITHA-MD",
+  "description": "Javascript WhatsApp bot made by Asitha",
+  "logo": "https://telegra.ph/file/38a4ba6f7a51c15f5feaf.jpg",
   "keywords": ["bot"],
   "success_url": "/",
 
@@ -9,8 +9,7 @@
     "SESSION_ID": {
       "description": "Put the session-id here.",
       "required": true
-    },  
-
+    }
 },
 
      "buildpacks": [
@@ -20,4 +19,3 @@
      ],
   "stack": "heroku-24"
 }
-
