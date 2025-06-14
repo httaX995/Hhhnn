@@ -1,22 +1,48 @@
+const { cmd } = require('../command');
 const config = require('../config');
-const { cmd, commands } = require('../command');
 
 cmd({
-    pattern: "ping",
-    desc: "Check bot's response time.",
+    pattern: "owner",
+    react: "☠️", // Reaction emoji when the command is triggered
+    alias: ["rashu", "king"],
+    desc: "Get owner number",
     category: "main",
-    react: "🍂",
     filename: __filename
-},
-async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
+}, 
+async (conn, mek, m, { from }) => {
     try {
-        const startTime = Date.now()
-        const message = await conn.sendMessage(from, { text: '> *PINGING...*' })
-        const endTime = Date.now()
-        const ping = endTime - startTime
-        await conn.sendMessage(from, { text: `> *🔥 SPEED : ${ping}ms*` }, { quoted: message })
-    } catch (e) {
-        console.log(e)
-        reply(`${e}`)
-    }
-})
+        // Owner's contact info
+        const ownerNumber = '+94760663483'; // Replace this with the actual owner number
+        const ownerName = 'MD'; // Replace this with the owner's name
+        const organization = 'WHATSAPP BOT DEVALOPER'; // Optional: replace with the owner's organization
+
+        // Create a vCard (contact card) for the owner
+        const vcard = 'BEGIN:VCARD\n' +
+                      'VERSION:3.0\n' +
+                      `FN:${ownerName}\n` +  // Full Name
+                      `ORG:${organization};\n` +  // Organization (Optional)
+                      `TEL;type=CELL;type=VOICE;waid=${ownerNumber.replace('+', '')}:${ownerNumber}\n` +  // WhatsApp ID and number
+                      'END:VCARD';
+
+        // Send the vCard first
+        const sentVCard = await conn.sendMessage(from, {
+            contacts: {
+                displayName: ownerName,
+                contacts: [{ vcard }]
+            }
+        });
+
+        // Send a reply message that references the vCard
+        await conn.sendMessage(from, {
+            text: `MD`,
+            contextInfo: {
+                mentionedJid: [ownerNumber.replace('94760663483') + '+94760663483@s.whatsapp.net'], // Mention the owner
+                quotedMessageId: sentVCard.key.id // Reference the vCard message
+            }
+        }, { quoted: mek });
+
+    } catch (error) {
+        console.error(error);
+        await conn.sendMessage(from, { text: 'Sorry, there was an error fetching the owner contact.' }, { quoted: mek聽});
+聽聽聽聽}
+});
