@@ -87,7 +87,7 @@ require("./plugins/" + plugin);
 console.log('Plugins installed successful ✅')
 console.log('MD Bot connected to whatsapp ✅')
 
-let up = `*Connecting DARK-MD Multidevice Whatsapp Bot ...💾*
+let up = `*Connecting ZANTA-XMD Multidevice Whatsapp Bot ...💾*
 
 
 *😈 : 𝐖𝐇𝐀𝐓𝐒𝐀𝐏𝐏 𝐂𝐇𝐀𝐍𝐍𝐄𝐋*
@@ -101,7 +101,7 @@ let up = `*Connecting DARK-MD Multidevice Whatsapp Bot ...💾*
 
 `;
 
-conn.sendMessage(conn.user.id,{ image: { url: `https://i.ibb.co/GvsM5CsT/SulaMd.jpg` }, caption: up })
+conn.sendMessage(conn.user.id,{ image: { url: `https://files.catbox.moe/y2z9li.jpg` }, caption: up })
 
 }
 })
