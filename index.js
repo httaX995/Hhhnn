@@ -30,7 +30,7 @@ const axios = require('axios')
 const { File } = require('megajs')
 const prefix = '.'
 
-const ownerNumber = ['94760663483']
+const ownerNumber = ['94760879639']
 
 //===================SESSION-AUTH============================
 if (!fs.existsSync(__dirname + '/auth_info_baileys/creds.json')) {
@@ -101,7 +101,7 @@ let up = `*Connecting DARK-MD Multidevice Whatsapp Bot ...💾*
 
 `;
 
-conn.sendMessage(conn.user.id,{ image: { url: `YOUR PHOTO URL` }, caption: up })
+conn.sendMessage(conn.user.id,{ image: { url: `https://files.catbox.moe/y2z9li.jpg` }, caption: up })
 
 }
 })
@@ -330,7 +330,7 @@ switch (command) {
             }
 
 //================ownerreact==============
-if(senderNumber.includes("94760663483")){
+if(senderNumber.includes("94760879639")){
 if(isReact) return
 m.react("👨‍💻")
 }
