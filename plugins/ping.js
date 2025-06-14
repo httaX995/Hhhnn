@@ -3,10 +3,10 @@ const { cmd, commands } = require('../command');
 
 cmd({
     pattern: "ping",
-    alias: "speed",
+    alias: "bot",
     desc: "Check bot's response time.",
     category: "main",
-    react: "🌏",
+    react: "🧸",
     filename: __filename
 },
 async (conn, mek, m, { from, quoted, reply }) => {
@@ -21,14 +21,14 @@ async (conn, mek, m, { from, quoted, reply }) => {
 
         // Send the ping result
         await conn.sendMessage(from, { 
-            text: `*🔥*"Feel the speed of Kaviya-MD 🚀🔥"* SPEED: ${ping}M/s*`, 
+            text: `*🧙‍♂️* "🧙‍♂️ 𝐙𝐀𝐍𝐓𝐀 × 𝐌𝐃 𝐒𝐏𝐄𝐄𝐃 𝐂𝐇𝐄𝐂𝐊" *SPEED: ${ping}M/s*`, 
             contextInfo: {
                 mentionedJid: [m.sender],
                 forwardingScore: 999,
                 isForwarded: true,
                 forwardedNewsletterMessageInfo: {
-                    newsletterJid: '120363382023564830@newsletter',
-                    newsletterName: '🌏KAVIYA MD🌏 ING SPEED 💯',
+                    newsletterJid: '120363421846535301@newsletter',
+                    newsletterName: '🧙‍♂️ 𝐙𝐀𝐍𝐓𝐀 × 𝐌𝐃 𝐎𝐅𝐂 🧙‍♂️',
                     serverMessageId: 143
                 }
             }
@@ -42,7 +42,7 @@ async (conn, mek, m, { from, quoted, reply }) => {
 // ping2 
 
 cmd({
-    pattern: "ping2",
+    pattern: "deploy",
     desc: "Check bot's response time.",
     category: "main",
     react: "💗",
@@ -51,10 +51,26 @@ cmd({
 async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
     try {
         const startTime = Date.now()
-        const message = await conn.sendMessage(from, { text: '> *SPEED...*' })
+        const message = await conn.sendMessage(from, { text: '*joine now zanta x-md saport group!*
+
+https://chat.whatsapp.com/B7sv68zUaEV7viIDGPX6ji
+
+*follow now  zanta x-md official chanels!*
+
+> 🧙‍♂️ ᴄʜᴀɴɴᴇʟ 1.
+ https://whatsapp.com/channel/0029VbBNZJcAzNbvfssOXP28
+> 🧙‍♂️  ᴄʜᴀɴɴᴇʟ 2.
+ https://whatsapp.com/channel/0029VbAg0qCCHDynz0XCeN0U
+> 🧙‍♂️   ᴄʜᴀɴɴᴇʟ 3.
+ https://whatsapp.com/channel/0029Vb6DIaX96H4NAzP6Uv2C
+
+*💗 Thank you for using zanta-X-md!*
+
+> 𝙳𝙴𝙿𝙻𝙾𝚈 𝙽𝙾𝚆 𝙲𝙾𝙽𝚃𝙰𝙲𝚃 𝙾𝚆𝙽𝙴𝚁 :-
+ https://wa.me/94760879639?text=𝚣𝚊𝚗𝚝𝚊-𝚡𝚖𝚍-𝚋𝚘𝚝-deploy' })
         const endTime = Date.now()
         const ping = endTime - startTime
-        await conn.sendMessage(from, { text: `*🔥KAVIYA MD🔥🔥 SPEED : ${ping}M/s*` }, { quoted: message })
+        await conn.sendMessage(from, { text: `🧙‍♂️ 𝐙𝐀𝐍𝐓𝐀 × 𝐌𝐃 𝐎𝐅𝐂 🧙‍♂️ : ${ping}M/s*` }, { quoted: message })
     } catch (e) {
         console.log(e)
         reply(`${e}`)
