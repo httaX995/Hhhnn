@@ -1,8 +1,9 @@
-const config = require('../config');
-const { cmd, commands } = require('../command');
+const axios = require("axios");
+const FormData = require("form-data");
+const fs = require("fs");
 const os = require("os");
-const { runtime } = require('../command');
-const imageUrl = 'https://i.ibb.co/GvsM5CsT/SulaMd.jpg';
+const path = require("path");
+const { cmd } = require("../command");
 
 cmd({
     pattern: "menu",
