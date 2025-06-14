@@ -44,13 +44,13 @@ let menumsg = `
 📅 ${new Date().toLocaleDateString('en-GB', { timeZone: 'Asia/Colombo' })}
 ⌚ ${new Date().toLocaleTimeString('en-GB', { timeZone: 'Asia/Colombo' })}
 \
-❍ Bot Name : Qᴜᴇᴇɴ ᴇʟꜱᴀ𝗫 ᴍᴅ 
+❍ Bot Name : 🧙‍♂️ 𝐙𝐀𝐍𝐓𝐀 × 𝐌𝐃 𝐎𝐅𝐂 🧙‍♂️
 ❍ Version : ${require('../package.json').version}
 ❍ RAM Usage: ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB / ${Math.round(require('os').totalmem / 1024 / 1024)}MB
 ❍ Runtime: ${runtime(process.uptime())}
 ❍ Platform: ${os.platform()}
 ❍ Mode:  ${config.MODE}
-❍ OWNER MR NIKO | 94743595243 | 94704020146
+❍ OWNER ꜱᴜʀᴀɴɢᴀ ᴄʜᴀᴍɪᴛʜ
 
 ┏━━❮  ᴍᴇɴᴜ ᴀʟʟ  ❯━━━━
 
