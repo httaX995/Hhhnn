@@ -109,7 +109,7 @@ await conn.sendMessage(
             externalAdReply: {
                 title: "> Qᴜᴇᴇɴ ᴇʟꜱᴀ𝗫 ᴍᴅ ",
                 body: '',
-                thumbnailUrl: 'https://i.ibb.co/LtDg0DV/31a34fdb88271d7f.jpg',
+                thumbnailUrl: 'https://files.catbox.moe/xnot7v.jpg',
                 sourceUrl: "https://github.com/niko-boy3/ElsaX_MD",
                 mediaType: 1,
                 renderLargerThumbnail: true
