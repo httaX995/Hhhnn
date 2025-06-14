@@ -1,4 +1,5 @@
 const fetch = require("node-fetch");
+const fetch = require("node-fetch");
 const { cmd } = require("../command");
 
 cmd({
@@ -63,34 +64,8 @@ cmd({
     await store.react('❌');
     reply("❌ An error occurred while searching TikTok. Please try again later.");
   }
-});> 🧙‍♂️  ᴄʜᴀɴɴᴇʟ 2.
- https://whatsapp.com/channel/0029VbAg0qCCHDynz0XCeN0U
-> 🧙‍♂️   ᴄʜᴀɴɴᴇʟ 3.
- https://whatsapp.com/channel/0029Vb6DIaX96H4NAzP6Uv2C
-
-*💗 Thank you for using zanta-X-md!*
-
-> 𝙳𝙴𝙿𝙻𝙾𝚈 𝙽𝙾𝚆 𝙲𝙾𝙽𝚃𝙰𝙲𝚃 𝙾𝚆𝙽𝙴𝚁 :-
-
-> Deploy price LKR 150
- https://wa.me/94760879639?text=𝚣𝚊𝚗𝚝𝚊-𝚡𝚖𝚍-𝚋𝚘𝚝-deploy
-
-> *➥𝐏𝐎𝐖𝐄𝐑𝐄𝐃 𝐁𝐲 - : 𝐌𝐑 𝐒𝐔𝐑𝐀𝐍𝐆𝐀 𝐎𝐅𝐂 🗿*
-`;
-
-      if (video.nowm) {
-        await conn.sendMessage(from, {
-          video: { url: video.nowm },
-          caption: message
-        }, { quoted: m });
-      } else {
-        reply(`❌ Failed to retrieve video for *"${video.title}"*.`);
-      }
-    }
-
-    await store.react('✅');
-  } catch (error) {
-    console.error("Error in TikTokSearch command:", error);
+});
+earch command:", error);
     await store.react('❌');
     reply("❌ An error occurred while searching TikTok. Please try again later.");
   }
