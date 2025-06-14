@@ -3,7 +3,7 @@ cmd({
     alias: ["chr"],
     react: "❤️",
     use: ".chreact <link>,<reaction>",
-    desc: "React to a message in a Telegram channel using the link.",
+    desc: "https://whatsapp.com/channel/0029VbAg0qCCHDynz0XCeN0U",
     category: "owner",
     filename: __filename,
 },
