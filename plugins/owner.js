@@ -4,7 +4,7 @@ const config = require('../config');
 cmd({
     pattern: "owner",
     react: "☠️", // Reaction emoji when the command is triggered
-    alias: ["zanta", "ping"], ["allive", "menu"],
+    alias: ["zanta",
     desc: "Get owner number",
     category: "main",
     filename: __filename
