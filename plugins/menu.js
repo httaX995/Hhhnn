@@ -38,7 +38,7 @@ async (conn, mek, m, { from, quoted, pushname, reply }) => {
 `;
 
         const sentMsg = await conn.sendMessage(from, {
-            image: { url: imageUrl },
+           imageUrl = 'https://i.ibb.co/GvsM5CsT/SulaMd.jpg',
             caption: selectionMessage,
             contextInfo: { forwardingScore: 999, isForwarded: true },
         }, { quoted: mek });
