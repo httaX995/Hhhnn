@@ -128,7 +128,7 @@ await conn.sendMessage(
                 title: "> 🧙‍♂️ 𝐙𝐀𝐍𝐓𝐀 × 𝐌𝐃 𝐎𝐅𝐂 🧙‍♂️ ",
                 body: '',
                 thumbnailUrl: 'https://files.catbox.moe/xnot7v.jpg',
-                sourceUrl: "https://files.catbox.moe/xnot7v.jpg",
+                sourceUrl: "https://files.catbox.moe/68rzgj.jpg",
                 mediaType: 1,
                 renderLargerThumbnail: true
             }
