@@ -3,7 +3,7 @@ const fs = require('fs');
 const axios = require('axios');//මේක අනිවාරෙන් හැම එකටම දාන්න
 const os = require('os');
 const path = require('path');
-const { cmd, commands } = require('../command');
+const { cmd, commands } = require('../lib/command');
 
 cmd({
     pattern: "tourl",
