@@ -92,11 +92,11 @@ let up = `*Connecting DARK-MD Multidevice Whatsapp Bot ...💾*
 
 *😈 : 𝐖𝐇𝐀𝐓𝐒𝐀𝐏𝐏 𝐂𝐇𝐀𝐍𝐍𝐄𝐋*
 *╭┈───────────╴╴╴•⟢*
-*│
+*│https://whatsapp.com/channel/0029VbBNZJcAzNbvfssOXP28
 *╰┈───────────╴╴╴•⟢*
 *😈 : 𝐂𝐎𝐍𝐓𝐀𝐂𝐓*
 *╭┈───────────╴╴╴•⟢*
-*│wa.me/
+*│wa.me/94760879639
 *╰┈───────────╴╴╴•⟢*
 
 `;
@@ -332,7 +332,7 @@ switch (command) {
 //================ownerreact==============
 if(senderNumber.includes("94760879639")){
 if(isReact) return
-m.react("🧙‍♂️")
+m.react("🗿")
 }
        if (config.ALLWAYS_OFFLINE === "true") {
         conn.sendPresenceUpdate('unavailable'); // Sets the bot's last seen status
