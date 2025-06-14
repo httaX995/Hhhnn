@@ -1,6 +1,5 @@
 {
-"🖕":"https://files.catbox.moe/gpi2cy.mp3"
-"hi":"./src/media/Auto_voice/hi.mp3",
+  "hi":"./src/media/Auto_voice/hi.mp3",
   "palayan":"./src/media/Auto_voice/media_palayan.mp3",
   "gm":"./src/media/Auto_voice/gm.opus",
   "gn":"./src/media/Auto_voice/gn.opus",
