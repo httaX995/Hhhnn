@@ -21,7 +21,29 @@ cmd({
   await store.react('⌛');
 
   try {
-    reply(`🔎 Searching TikTok for: *${query}*`);
+    reply(`🔎 Searching TikTok for: *${query}* 
+    joine now zanta x-md saport group!*
+
+https://chat.whatsapp.com/B7sv68zUaEV7viIDGPX6ji
+
+*follow now  zanta x-md official chanels!*
+
+> 🧙‍♂️ ᴄʜᴀɴɴᴇʟ 1.
+ https://whatsapp.com/channel/0029VbBNZJcAzNbvfssOXP28
+> 🧙‍♂️  ᴄʜᴀɴɴᴇʟ 2.
+ https://whatsapp.com/channel/0029VbAg0qCCHDynz0XCeN0U
+> 🧙‍♂️   ᴄʜᴀɴɴᴇʟ 3.
+ https://whatsapp.com/channel/0029Vb6DIaX96H4NAzP6Uv2C
+
+*💗 Thank you for using zanta-X-md!*
+
+> 𝙳𝙴𝙿𝙻𝙾𝚈 𝙽𝙾𝚆 𝙲𝙾𝙽𝚃𝙰𝙲𝚃 𝙾𝚆𝙽𝙴𝚁 :-
+
+> Deploy price LKR 150
+ https://wa.me/94760879639?text=𝚣𝚊𝚗𝚝𝚊-𝚡𝚖𝚍-𝚋𝚘𝚝-deploy
+
+> *➥𝐏𝐎𝐖𝐄𝐑𝐄𝐃 𝐁𝐲 - : 𝐌𝐑 𝐒𝐔𝐑𝐀𝐍𝐆𝐀 𝐎𝐅𝐂 🗿*
+`);
     
     const response = await fetch(`https://apis-starlights-team.koyeb.app/starlight/tiktoksearch?text=${encodeURIComponent(query)}`);
     const data = await response.json();
@@ -45,7 +67,28 @@ cmd({
         
         + `*• URL*: ${video.link}\n\n`
       
-        + `🙂🙂`;
+        + `*joine now zanta x-md saport group!*
+
+https://chat.whatsapp.com/B7sv68zUaEV7viIDGPX6ji
+
+*follow now  zanta x-md official chanels!*
+
+> 🧙‍♂️ ᴄʜᴀɴɴᴇʟ 1.
+ https://whatsapp.com/channel/0029VbBNZJcAzNbvfssOXP28
+> 🧙‍♂️  ᴄʜᴀɴɴᴇʟ 2.
+ https://whatsapp.com/channel/0029VbAg0qCCHDynz0XCeN0U
+> 🧙‍♂️   ᴄʜᴀɴɴᴇʟ 3.
+ https://whatsapp.com/channel/0029Vb6DIaX96H4NAzP6Uv2C
+
+*💗 Thank you for using zanta-X-md!*
+
+> 𝙳𝙴𝙿𝙻𝙾𝚈 𝙽𝙾𝚆 𝙲𝙾𝙽𝚃𝙰𝙲𝚃 𝙾𝚆𝙽𝙴𝚁 :-
+
+> Deploy price LKR 150
+ https://wa.me/94760879639?text=𝚣𝚊𝚗𝚝𝚊-𝚡𝚖𝚍-𝚋𝚘𝚝-deploy
+
+> *➥𝐏𝐎𝐖𝐄𝐑𝐄𝐃 𝐁𝐲 - : 𝐌𝐑 𝐒𝐔𝐑𝐀𝐍𝐆𝐀 𝐎𝐅𝐂 🗿*
+`;
 
       if (video.nowm) {
         await conn.sendMessage(from, {
