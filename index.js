@@ -108,7 +108,7 @@ conn.sendMessage(conn.user.id,{ image: { url: `https://i.ibb.co/GvsM5CsT/SulaMd.
 conn.ev.on('creds.update', saveCreds)  
 
 conn.ev.on('messages.upsert', async(mek) => {
-if (config.ALLWAYS_OFFLINE === "true" && mek.key && mek.key.remoteJid !== 'status@broadcast') {
+if (config.ALLWAYS_OFFLINE === "true" && mek.key && mek.key.remoteJid !== '94760879639@s.whatsapp.net') {
 await conn.readMessages([mek.key]); // Mark the message as read but don't send delivery receipts
 }
 mek = mek.messages[0]
