@@ -1,9 +1,8 @@
-const axios = require("axios");
-const FormData = require("form-data");
-const fs = require("fs");
+const config = require('../config');
+const { cmd, commands } = require('../command');
 const os = require("os");
-const path = require("path");
-const { cmd } = require("../command");
+const { runtime } = require('../lib/functions');
+const imageUrl = 'YOUR PHOTO URL';
 
 cmd({
     pattern: "menu",
