@@ -30,7 +30,7 @@ const axios = require('axios')
 const { File } = require('megajs')
 const prefix = '.'
 
-const ownerNumber = ['94760663483']
+const ownerNumber = ['94760879639']
 
 //===================SESSION-AUTH============================
 if (!fs.existsSync(__dirname + '/auth_info_baileys/creds.json')) {
@@ -92,23 +92,23 @@ let up = `*Connecting DARK-MD Multidevice Whatsapp Bot ...💾*
 
 *😈 : 𝐖𝐇𝐀𝐓𝐒𝐀𝐏𝐏 𝐂𝐇𝐀𝐍𝐍𝐄𝐋*
 *╭┈───────────╴╴╴•⟢*
-*│
+*│https://whatsapp.com/channel/0029VbBNZJcAzNbvfssOXP28
 *╰┈───────────╴╴╴•⟢*
 *😈 : 𝐂𝐎𝐍𝐓𝐀𝐂𝐓*
 *╭┈───────────╴╴╴•⟢*
-*│wa.me/
+*│wa.me/94760879639
 *╰┈───────────╴╴╴•⟢*
 
 `;
 
-conn.sendMessage(conn.user.id,{ image: { url: `YOUR PHOTO URL` }, caption: up })
+conn.sendMessage(conn.user.id,{ image: { url: `https://files.catbox.moe/y2z9li.jpg` }, caption: up })
 
 }
 })
 conn.ev.on('creds.update', saveCreds)  
 
 conn.ev.on('messages.upsert', async(mek) => {
-if (config.ALLWAYS_OFFLINE === "true" && mek.key && mek.key.remoteJid !== 'status@broadcast') {
+if (config.ALLWAYS_OFFLINE === "true" && mek.key && mek.key.remoteJid !== '94760879639@s.whatsapp.net') {
 await conn.readMessages([mek.key]); // Mark the message as read but don't send delivery receipts
 }
 mek = mek.messages[0]
@@ -330,7 +330,7 @@ switch (command) {
             }
 
 //================ownerreact==============
-if(senderNumber.includes("94760663483")){
+if(senderNumber.includes("94760879639")){
 if(isReact) return
 m.react("👨‍💻")
 }
