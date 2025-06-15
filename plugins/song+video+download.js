@@ -29,59 +29,13 @@ cmd({
             return reply("Failed to fetch the video. Please try again later.");
         }
         
-        let ytmsg = `╭━━━〔 🧙‍♂️ 𝐙𝐀𝐍𝐓𝐀 × 𝐌𝐃 𝐎𝐅𝐂 🧙‍♂️ 〕━━━┈⊷
-┆
-┆
-┆ 📝 *Title* -  ${yts.title}
-┆
-┆
-┆
-┆ 📜 *Duration* - ${yts.timestamp}
-┆
-┆
-┆
-┆ 👀 *Views* -  ${yts.views}
-┆
-┆
-┆
-┆ 👤 *Author* -  ${yts.author.name}
-┆
-┆
-┆
-┇ 🖇️ *Link* -  ${yts.url}
-┆
-┆
+        let ytmsg = `╭━━━〔 *🧙‍♂️ 𝐙𝐀𝐍𝐓𝐀 × 𝐌𝐃 𝐎𝐅𝐂 🧙‍♂️* 〕━━━┈⊷
+┇๏ *Title* -  ${yts.title}
+┇๏ *Duration* - ${yts.timestamp}
+┇๏ *Views* -  ${yts.views}
+┇๏ *Author* -  ${yts.author.name}
+┇๏ *Link* -  ${yts.url}
 ╰────────────────┈⊷
-
-
-
-  📌 *Type* '.menu' *to see all features.*
-⚠️ *Please follow the rules before use — no spam or calls.*
-
-*joine now zanta x-md saport group!*
-
-https://chat.whatsapp.com/B7sv68zUaEV7viIDGPX6ji
-
-*follow now  zanta x-md official chanels!*
-
-> 🧙‍♂️ ᴄʜᴀɴɴᴇʟ 1.
- https://whatsapp.com/channel/0029VbBNZJcAzNbvfssOXP28
-> 🧙‍♂️  ᴄʜᴀɴɴᴇʟ 2.
- https://whatsapp.com/channel/0029VbAg0qCCHDynz0XCeN0U
-> 🧙‍♂️   ᴄʜᴀɴɴᴇʟ 3.
- https://whatsapp.com/channel/0029Vb6DIaX96H4NAzP6Uv2C
-
-*💗 Thank you for using zanta-X-md!*
-
-> 𝙳𝙴𝙿𝙻𝙾𝚈 𝙽𝙾𝚆 𝙲𝙾𝙽𝚃𝙰𝙲𝚃 𝙾𝚆𝙽𝙴𝚁 :-
-
-> Deploy price LKR 150
- https://wa.me/94760879639?text=𝚣𝚊𝚗𝚝𝚊-𝚡𝚖𝚍-𝚋𝚘𝚝-deploy
-
-> *➥𝐏𝐎𝐖𝐄𝐑𝐄𝐃 𝐁𝐲 - : 𝐌𝐑 𝐒𝐔𝐑𝐀𝐍𝐆𝐀 𝐎𝐅𝐂 🗿*
-
-
-
 
 `;
 
@@ -96,7 +50,7 @@ https://chat.whatsapp.com/B7sv68zUaEV7viIDGPX6ji
             document: { url: data.result.download_url }, 
             mimetype: "video/mp4", 
             fileName: `${data.result.title}.mp4`, 
-            caption: `> *${yts.title}*\n>  *➥𝐏𝐎𝐖𝐄𝐑𝐄𝐃 𝐁𝐲 - : 𝐌𝐑 𝐒𝐔𝐑𝐀𝐍𝐆𝐀 𝐎𝐅𝐂 🗿*`
+            caption: `> *${yts.title}*\n> 🧙‍♂️ 𝐙𝐀𝐍𝐓𝐀 × 𝐌𝐃 𝐎𝐅𝐂 🧙‍♂️`
         }, { quoted: mek });
 
     } catch (e) {
@@ -133,55 +87,12 @@ const yt = await ytsearch(q);
     }
     
     let ytmsg = `╭━━━〔 🧙‍♂️ 𝐙𝐀𝐍𝐓𝐀 × 𝐌𝐃 𝐎𝐅𝐂 🧙‍♂️ 〕━━━┈⊷
-┆
-┆
-┆ 📝 *Title* -  ${yts.title}
-┆
-┆
-┆
-┆ 📜 *Duration* - ${yts.timestamp}
-┆
-┆
-┆
-┆ 👀 *Views* -  ${yts.views}
-┆
-┆
-┆
-┆ 👤 *Author* -  ${yts.author.name}
-┆
-┆
-┆
-┇ 🖇️ *Link* -  ${yts.url}
-┆
-┆
+┇๏ *Tital* -  ${yts.title}
+┇๏ *Duration* - ${yts.timestamp}
+┇๏ *Views* -  ${yts.views}
+┇๏ *Author* -  ${yts.author.name} 
+┇๏ *Link* -  ${yts.url}
 ╰────────────────┈⊷
-
-
-
-  📌 *Type* '.menu' *to see all features.*
-⚠️ *Please follow the rules before use — no spam or calls.*
-
-*joine now zanta x-md saport group!*
-
-https://chat.whatsapp.com/B7sv68zUaEV7viIDGPX6ji
-
-*follow now  zanta x-md official chanels!*
-
-> 🧙‍♂️ ᴄʜᴀɴɴᴇʟ 1.
- https://whatsapp.com/channel/0029VbBNZJcAzNbvfssOXP28
-> 🧙‍♂️  ᴄʜᴀɴɴᴇʟ 2.
- https://whatsapp.com/channel/0029VbAg0qCCHDynz0XCeN0U
-> 🧙‍♂️   ᴄʜᴀɴɴᴇʟ 3.
- https://whatsapp.com/channel/0029Vb6DIaX96H4NAzP6Uv2C
-
-*💗 Thank you for using zanta-X-md!*
-
-> 𝙳𝙴𝙿𝙻𝙾𝚈 𝙽𝙾𝚆 𝙲𝙾𝙽𝚃𝙰𝙲𝚃 𝙾𝚆𝙽𝙴𝚁 :-
-
-> Deploy price LKR 150
- https://wa.me/94760879639?text=𝚣𝚊𝚗𝚝𝚊-𝚡𝚖𝚍-𝚋𝚘𝚝-deploy
-
-> *➥𝐏𝐎𝐖𝐄𝐑𝐄𝐃 𝐁𝐲 - : 𝐌𝐑 𝐒𝐔𝐑𝐀𝐍𝐆𝐀 𝐎𝐅𝐂 🗿*
 
 `;
 
@@ -198,7 +109,7 @@ https://chat.whatsapp.com/B7sv68zUaEV7viIDGPX6ji
         document: { url: data.result.downloadUrl }, 
         mimetype: "audio/mpeg", 
         fileName: `${data.result.title}.mp3`, 
-        caption: `> *➥𝐏𝐎𝐖𝐄𝐑𝐄𝐃 𝐁𝐲 - : 𝐌𝐑 𝐒𝐔𝐑𝐀𝐍𝐆𝐀 𝐎𝐅𝐂 🗿*`
+        caption: `> 🧙‍♂️ 𝐙𝐀𝐍𝐓𝐀 × 𝐌𝐃 𝐎𝐅𝐂 🧙‍♂️`
     }, { quoted: mek });
 
 } catch (e) {
