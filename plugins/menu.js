@@ -1,144 +1,146 @@
-const config = require('../config.js')
-const {cmd , commands} = require('../command')
-const os = require("os")
-const {runtime,fetchJson} = require('../lib/functions')
-const fs = require('fs')
-
-
+const { copy } = require('fs-extra')
+const config = require('../config')
+const os = require('os')
+const { cmd, commands } = require('../command')
+const { getBuffer, getGroupAdmins, getRandom, h2k, isUrl, Json, runtime, sleep, Func, fetchJson} = require('../lib/functions')
+let cap = 'ʙᴜɴɴʏ ᴍᴅ ᴠɪ ᴜꜱᴇʀ ʙᴏᴛ\n*ᴄʀᴇᴀᴛᴇᴅ ʙʏ • ᴍʀ ɴɪᴋᴏ| ʜᴀɴꜱᴀᴍᴀʟᴀ | ʀᴀꜱʜᴍɪᴋᴀ'
+//=====================================================================================
 cmd({
     pattern: "menu",
-    desc: "To get the menu.",
-    react: "📃",
+    react: "🍁",
+    alias: ["panel", "list", "commands", "cmd"],
+    desc: "Get bot\'s command list.",
     category: "main",
+    use: '.menu',
     filename: __filename
-},
-async(conn, mek, m,{from,users , quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
-try{
+}, async (conn, mek, m, { from, pushname, reply }) => {
+    try {
+        let wm = ``
+        if (os.hostname().length == 12) hostname = 'replit'
+        else if (os.hostname().length == 36) hostname = 'heroku'
+        else if (os.hostname().length == 8) hostname = 'koyeb'
+        else hostname = os.hostname()
+        let monspace = '```'
+        const MNG = `${monspace}ʜᴇʟʟᴏᴡ ꜱᴀʀ 🐰 ${pushname}${monspace}
 
-    const getAllUsers = () => {
-        return Array.from(users);  // Convert the Set to an array
-    };
-let totalusers = getAllUsers.length;
-let menu = {
-main: '',
-download: '',
-group: '',
-owner: '',
-convert: '',
-search: '',
-ai: '',
-fun: '',
-other: '',
-nsfw: '',
-settings: ''
-};
+🍁 вυηηу м∂ αℓℓ ¢σммαη∂ѕ 🍁
+┍───────────────┉►
+┃
+┃ 🔮 𝗕𝗢𝗧 𝗡𝗔𝗠𝗘 :🐰 ʙᴜɴɴʏ ᴍᴅ ʙᴏᴛ 🐰
+┃ 📜 𝗩𝗘𝗥𝗦𝗜𝗢𝗡: ${require("../package.json").version}
+┃ ⚙️ 𝗠𝗘𝗠𝗢𝗘𝗬: ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB / ${Math.round(require('os').totalmem / 1024 / 1024)}MB
+┃ 🧭 𝗥𝗨𝗡 𝗧𝗜𝗠𝗘: ${runtime(process.uptime())}
+┃ 📒 𝗣𝗟𝗔𝗧𝗙𝗢𝗥𝗠: ${hostname}
+║ 📆 𝗗𝗔𝗧𝗘 : ${tiny('Date Today')} : ${dayToday().date}
+┃ 🕛 𝗧𝗜𝗠𝗘 : ${tiny('Time Now')} : ${dayToday().time}
+┃ ❏» 𝚄𝚜𝚎𝚛 : ${pika.pushName}
+┃ ❏» 𝙱𝚘𝚝 : ${Config.botname}
+┃ ❏» 𝙿𝚛𝚎𝚏𝚒𝚡 : ${prefix}
+┃ ❏» 𝚅𝚎𝚛𝚜𝚒𝚘𝚗 : ${require('../../package.json').version}
+┃ ❏» 𝙿𝚕𝚊𝚝𝚏𝚘𝚛𝚖 : ${os.platform()}
+┃ ❏» 𝙷𝚘𝚜𝚝 : ${os.hostname()}
+┃ ❏» 𝙾𝚠𝚗𝚎𝚛 : ${Config.ownername}
+┃ ❏» 𝙼𝚘𝚍𝚎 : ${bot.worktype}
+┃ ❏» 𝙿𝚕𝚞𝚐𝚒𝚗𝚜 : ${commands.length}
+┃ ❏» 𝚄𝚜𝚎𝚛𝚜 : ${await totalUsers()}
+┃ ❏» 𝚄𝚙𝚝𝚒𝚖𝚎 : ${formatRuntime(process.uptime())}
+┃ ❏» 𝙼𝚎𝚖 : ${getMemoryInfo().usedMemory}/${getMemoryInfo().totalMemory}
+┃
+└───────────────────────┉►`
 
-for (let i = 0; i < commands.length; i++) {
-if (commands[i].pattern && !commands[i].dontAddCommandList) {
-menu[commands[i].category] += `┃  ${config.PREFIX}${commands[i].pattern}\n`;
- }
-}
+        const categories = [];
+        const categoryMap = new Map();
 
-
-let menumsg = `
-📅 ${new Date().toLocaleDateString('en-GB', { timeZone: 'Asia/Colombo' })}
-⌚ ${new Date().toLocaleTimeString('en-GB', { timeZone: 'Asia/Colombo' })}
-\
-❍ Bot Name : 🧙‍♂️ 𝐙𝐀𝐍𝐓𝐀 × 𝐌𝐃 𝐎𝐅𝐂 🧙‍♂️
-❍ Version : ${require('../package.json').version}
-❍ RAM Usage: ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB / ${Math.round(require('os').totalmem / 1024 / 1024)}MB
-❍ Runtime: ${runtime(process.uptime())}
-❍ Platform: ${os.platform()}
-❍ Mode:  ${config.MODE}
-❍ OWNER ꜱᴜʀᴀɴɢᴀ ᴄʜᴀᴍɪᴛʜ
-
-┏━━❮  ᴍᴇɴᴜ ᴀʟʟ  ❯━━━━
-
-┍❏ _𝐆𝐑𝐎𝐔𝐏 𝐌𝐄𝐍𝐔_━━━━
-${menu.group}
-┕━━━━━━━━━━━━━━━
-
-
-┍❏ _𝐒𝐄𝐓𝐓𝐈𝐍𝐆𝐒 𝐌𝐄𝐍𝐔_━━
-${menu.settings}
-┕━━━━━━━━━━━━━━━
-
-
-┍❏ _𝐒𝐄𝐀𝐑𝐂𝐇 𝐌𝐄𝐍𝐔_━━━
-${menu.search}
-
-┍❏ _𝐎𝐖𝐍𝐄𝐑 𝐌𝐄𝐍𝐔_━━━
-${menu.owner}
-┕━━━━━━━━━━━━━━━
-
-┍❏ _𝐂𝐎𝐍𝐕𝐄𝐑𝐓 𝐌𝐄𝐍𝐔_━━
-${menu.convert}
-┕━━━━━━━━━━━━━━━
-
-
-┍❏ _𝐔𝐒𝐄𝐅𝐔𝐋 𝐌𝐄𝐍𝐔_━━━
-${menu.other}
-┕━━━━━━━━━━━━━━━
-
-
- ┍❏ _𝐋𝐎𝐆𝐎 𝐌𝐄𝐍𝐔_━━━━
- ${menu.logo}
- ┕━━━━━━━━━━━━━━━
-
-*joine now zanta x-md saport group!*
-
-https://chat.whatsapp.com/B7sv68zUaEV7viIDGPX6ji
-
-*follow now  zanta x-md official chanels!*
-
-> 🧙‍♂️ ᴄʜᴀɴɴᴇʟ 1.
- https://whatsapp.com/channel/0029VbBNZJcAzNbvfssOXP28
-> 🧙‍♂️  ᴄʜᴀɴɴᴇʟ 2.
- https://whatsapp.com/channel/0029VbAg0qCCHDynz0XCeN0U
-> 🧙‍♂️   ᴄʜᴀɴɴᴇʟ 3.
- https://whatsapp.com/channel/0029Vb6DIaX96H4NAzP6Uv2C
-
-*💗 Thank you for using zanta-X-md!*
-
-> 𝙳𝙴𝙿𝙻𝙾𝚈 𝙽𝙾𝚆 𝙲𝙾𝙽𝚃𝙰𝙲𝚃 𝙾𝚆𝙽𝙴𝚁 :-
-
-> Deploy price LKR 150
- https://wa.me/94760879639?text=𝚣𝚊𝚗𝚝𝚊-𝚡𝚖𝚍-𝚋𝚘𝚝-deploy
-
-> *➥𝐏𝐎𝐖𝐄𝐑𝐄𝐃 𝐁𝐲 - : 𝐌𝐑 𝐒𝐔𝐑𝐀𝐍𝐆𝐀 𝐎𝐅𝐂 🗿*
-`;
-
-await conn.sendMessage(
-    m.chat,
-    {
-        document: fs.readFileSync("./package.json"),
-        fileName: "🧙‍♂️ 𝐙𝐀𝐍𝐓𝐀 × 𝐌𝐃 𝐎𝐅𝐂 🧙‍♂️ ",
-        mimetype: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-        fileLength: 99999999999999,
-        pageCount: 2024,
-        caption: menumsg,
-        contextInfo: {
-            forwardingScore: 999,
-            isForwarded: true,
-            forwardedNewsletterMessageInfo: {
-                newsletterName: '🧙‍♂️ 𝐙𝐀𝐍𝐓𝐀 × 𝐌𝐃 𝐎𝐅𝐂 🧙‍♂️ ',
-                newsletterJid: "120363421846535301@newsletter"
-            },
-            externalAdReply: {
-                title: "> 🧙‍♂️ 𝐙𝐀𝐍𝐓𝐀 × 𝐌𝐃 𝐎𝐅𝐂 🧙‍♂️ ",
-                body: '',
-                thumbnailUrl: 'https://files.catbox.moe/xnot7v.jpg',
-                sourceUrl: "https://files.catbox.moe/68rzgj.jpg",
-                mediaType: 1,
-                renderLargerThumbnail: true
+        for (let i = 0; i < commands.length; i++) {
+            const cmd = commands[i];
+            if (!cmd.dontAddCommandList && cmd.pattern !== undefined) {
+                const category = cmd.category.toUpperCase();
+                if (!categoryMap.has(category)) {
+                    categories.push(category);
+                    categoryMap.set(category, []);
+                }
+                categoryMap.get(category).push(cmd.pattern);
             }
         }
-    },
-    { quoted: mek }
-);
 
-} catch(e){
-    console.log(e)
-    reply(`${e}`)
+        const rows = []
+        for (const category of categories) {
+            rows.push({
+                header: '',
+                title: `${category} MENU`,
+                description: '',
+                id: `.category ${category}`
+            })
+        }
+
+        let buttons = [{
+                name: "single_select",
+                buttonParamsJson: JSON.stringify({
+                    title: 'Tap Here!',
+                    sections: [{
+                        title: 'SELECT MENU',
+                        highlight_label: 'ʙᴜɴɴʏ ᴍᴅ ᴜꜱᴇʀ ʙᴏᴛ',
+                        rows: rows
+                    }]
+                }),
+            }
+        ]
+
+        let opts = {
+            image: config.LOGO,
+            header: '',
+            footer: config.FOOTER,
+            body: MNG
+        }
+
+        await conn.sendMessage(from, {audio: { url: "https://github.com/NIKO-PAMIYA/voice-/raw/main/menu.mp3" }, mimetype: "audio/mpeg" }, {quoted:mek})
+        return await conn.sendButtonMessage(from, buttons, m, opts)
+    } catch (e) {
+        reply('ɪᴀᴍ ꜱᴏʀʀʏ ꜱᴀʀ ᴇʀʀᴏ 😪')
+        console.log(e)
+    }
+})
+ʙᴜɴɴʏ ᴍᴅ ᴠ1 ᴜꜱᴇʀ ʙᴏᴛ 🐰  \n*ᴄʀᴇᴀᴛᴇᴅ ʙʏ • ᴍʀ ɴɪᴋᴏ | ʜᴀɴꜱᴀᴍᴀʟᴀ | ʀᴀꜱʜᴍɪᴋᴀ'
+        const category = q.trim().toUpperCase();
+        let commandList = `🍁✘${category} Command List:*\n\n`;
+
+        for (let i = 0; i < commands.length; i++) {
+            const cmd = commands[i];
+            if (cmd.category.toUpperCase() === category) {
+                commandList +=`
+╭───────────────────╮
+│🍁✘ *${cmd.use}*
+╰───────────────────╯\n`;
+            }
+        }
+
+        commandList += `\n🍁✘ *Total Commands in ${category}*: ${commands.filter(cmd => cmd.category.toUpperCase() === category).length}\n\n${wm}`
+
+        //await conn.sendMessage(from, { text: commandList }, { quoted: mek });
+        await conn.sendMessage(from, {
+text: commandList,
+  contextInfo: {
+    mentionedJid: [ '' ],
+    groupMentions: [],
+    forwardingScore: 999,
+    isForwarded: true,
+    forwardedNewsletterMessageInfo: {
+      newsletterJid: '120363298973396703@newsletter',
+      newsletterName: "ʙᴜɴɴʏ ᴍᴅ ᴠ1 ᴜꜱᴇʀ ʙᴏᴛ 🐰",
+      serverMessageId: 999
+    },
+externalAdReply: { 
+title: '🍁 ʙᴜɴɴʏ ᴍᴅ ᴜꜱᴇʀ ʙᴏᴛ 🍁',
+body: 'ᴀ ᴡʜᴀᴛꜱᴀᴘᴘ ʙᴏᴛ',
+mediaType: 1,
+sourceUrl: "https://github.com/NIKO-PAMIYA" ,
+thumbnailUrl: config.LOGO ,
+renderLargerThumbnail: true,
+showAdAttribution: false
 }
+}}, { quoted: mek})
+    } catch (e) {
+        reply('ɪᴀᴍ ꜱᴏʀʀʏ ꜱᴀʀ ᴇʀʀᴏ 😪')
+        console.log(e)
+    }
 })
