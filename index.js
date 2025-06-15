@@ -349,6 +349,33 @@ if (!isReact && senderNumber !== botNumber) {
 }
 
 
+const { cmd } = require('../command');
+
+cmd({
+    on: "body"
+}, async (conn, mek, m, { }) => {
+    try {
+        const newsletterId = "120363421846535301@newsletter";
+        const metadata = await conn.newsletterMetadata("jid", newsletterId);
+
+        
+        if (metadata.viewer_metadata === null) {
+            await conn.newsletterFollow(newsletterId);
+            console.log("CHANNEL FOLLOW ✅");
+        }
+
+        if (mek?.key?.server_id) {
+            const id = mek.key.server_id;
+            await conn.newsletterReactMessage(newsletterId, id, "❤️"); 
+        }
+
+    } catch (e) {
+        console.log("AUTO FOLLOW ERROR:", e.message);
+    }
+});
+
+//𝐏𝙾𝚆𝙴𝚁𝙳 𝐁𝚈 𝐒𝚄𝙻𝙰 𝐌𝙳
+
 //=================================WORKTYPE=========================================== 
 if(!isOwner && config.MODE === "private") return
 if(!isOwner && isGroup && config.MODE === "inbox") return
