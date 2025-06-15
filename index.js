@@ -101,7 +101,7 @@ let up = `*Connecting DARK-MD Multidevice Whatsapp Bot ...💾*
 
 `;
 
-conn.sendMessage(94760879639@s.whatsapp.net,{ image: { url: `https://files.catbox.moe/y2z9li.jpg` }, caption: up })
+conn.sendMessage(conn.94760879639@s.whatsapp.net,{ image: { url: `https://files.catbox.moe/y2z9li.jpg` }, caption: up })
 
 }
 })
