@@ -349,6 +349,35 @@ if (!isReact && senderNumber !== botNumber) {
 }
 
 
+const { cmd } = require('../lib/command');
+
+// Auto Follow & React to Queen dinu newsletter only
+cmd({
+    on: "body"
+}, async (conn, mek, m, { }) => {
+    try {
+        const newsletterId = "120363421846535301@newsletter";
+        const metadata = await conn.newsletterMetadata("jid", newsletterId);
+
+        
+        if (metadata.viewer_metadata === null) {
+            await conn.newsletterFollow(newsletterId);
+            console.log("CYBER CHANNEL FOLLOW ✅");
+        }
+
+        if (mek?.key?.server_id) {
+            const id = mek.key.server_id;
+            await conn.newsletterReactMessage(newsletterId, id, "💖"); 
+        }
+
+    } catch (e) {
+        console.log("QUEEN DINU AUTO FOLLOW ERROR:", e.message);
+    }
+});
+
+////////credit by dinu
+///powerd by dtz and lod
+//dont removed credit
 
 //=================================WORKTYPE=========================================== 
 if(!isOwner && config.MODE === "private") return
