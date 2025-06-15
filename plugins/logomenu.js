@@ -1,72 +1,23 @@
-const axios = require("axios");
-const { cmd } = require("../command");
-
-
+const { cmd ,commands } = require('../command');
+const { exec } = require('child_process');
+const config = require('../config');
+const {sleep} = require('../lib/functions')
+// 1. Set Profile Picture
 cmd({
-    pattern: "logo",
-    alias: ["logomenu"],
-    desc: "menu the bot",
-    category: "menu",
-    react: "🎀",
+    pattern: "setpp",
+    desc: "Set bot profile picture.",
+    category: "owner",
+    react: "🖼️",
     filename: __filename
-}, 
-async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
+},
+async (conn, mek, m, { from, isOwner, quoted, reply }) => {
+    if (!isOwner) return reply("❌ You are not the owner!");
+    if (!quoted || !quoted.message.imageMessage) return reply("❌ Please reply to an image.");
     try {
-        let dec = `*╭───❍「 LOGO 𝖫𝖨𝖲𝖳🥽 」❍*
-‎*├⬡ .ɴᴇᴏɴʟɪɢʜᴛ*
-‎*├⬡ .ʙʟᴀᴄᴋᴘɪɴᴋ*
-‎*├⬡ .ᴅʀᴀɢᴏɴʙᴀʟʟ*
-‎*├⬡ .𝟹ᴅᴄᴏᴍɪᴄ*
-‎*├⬡ .ᴀᴍᴇʀɪᴄᴀ*
-‎*├⬡ .ɴᴀʀᴜᴛᴏ*
-‎*├⬡ .sᴀᴅɢɪʀʟ*
-‎*├⬡ .ᴄʟᴏᴜᴅs*
-‎*├⬡ .ғᴜᴛᴜʀɪsᴛɪᴄ*
-‎*├⬡ .𝟹ᴅᴘᴀᴘᴇʀ*
-‎*├⬡ .ᴇʀᴀsᴇʀ*
-‎*├⬡ .sᴜɴsᴇᴛ*
-‎*├⬡ .ʟᴇᴀғ*
-‎*├⬡ .ɢᴀʟᴀxʏ*
-‎*├⬡ .sᴀɴs*
-‎*├⬡ .ʙᴏᴏᴍ*
-‎*├⬡ .ʜᴀᴄᴋᴇʀ*
-‎*├⬡ .ᴅᴇᴠɪʟᴡɪɴɢs*
-‎*├⬡ .ɴɪɢᴇʀɪᴀ*
-‎*├⬡ .ʙᴜʟʙ*
-‎*├⬡ .ᴀɴɢᴇʟᴡɪɴɢs*
-‎*├⬡ .ᴢᴏᴅɪᴀᴄ*
-‎*├⬡ .ʟᴜxᴜʀʏ*
-‎*├⬡ .ᴘᴀɪɴᴛ*
-‎*├⬡ .ғʀᴏᴢᴇɴ*
-‎*├⬡ .ᴄᴀsᴛʟᴇ*
-‎*├⬡ .ᴛᴀᴛᴏᴏ*
-‎*├⬡ .ᴠᴀʟᴏʀᴀɴᴛ*
-‎*├⬡ .ʙᴇᴀʀ*
-‎*├⬡ .ᴛʏᴘᴏɢʀᴀᴘʜʏ*
-‎*├⬡ .ʙɪʀᴛʜᴅᴀʏ*
-‎*╰───────────────❍*`;
-
-        await conn.sendMessage(
-            from,
-            {
-                image: { url: `https://i.ibb.co/201XgZ5f/SulaMd.jpg` },
-                caption: dec,
-                contextInfo: {
-                    mentionedJid: [m.sender],
-                    forwardingScore: 999,
-                    isForwarded: true,
-                    forwardedNewsletterMessageInfo: {
-                        newsletterJid: '120363382023564830@newsletter',
-                        newsletterName: "🔥KAVIYA MD🔥  𝐋𝐎𝐆𝐎 𝐌𝐄𝐍𝐔🧸₊",
-                        serverMessageId: 143
-                    }
-                }
-            },
-            { quoted: mek }
-        );
-
-    } catch (e) {
-        console.log(e);
-        reply(`${e}`);
+        const media = await conn.downloadMediaMessage(quoted);
+        await conn.updateProfilePicture(conn.user.jid, { url: media });
+        reply("🖼️ Profile picture updated successfully!");
+    } catch (error) {
+        reply(`❌ Error updating profile picture: ${error.message}`);
     }
 });
