@@ -1,173 +1,126 @@
-const config = require('../config');
-const { cmd, commands } = require('../command');
-const os = require("os");
-const { runtime } = require('../functions');
-const imageUrl = 'https://files.catbox.moe/xnot7v.jpg';
+const config = require('../config.js')
+const {cmd , commands} = require('../command')
+const os = require("os")
+const {runtime,fetchJson} = require('../lib/functions')
+const fs = require('fs')
+
 
 cmd({
     pattern: "menu",
-    react: "📜",
-    alias: ["panel", "commands"],
-    desc: "Get Bot Menu",
+    desc: "To get the menu.",
+    react: "🙈",
     category: "main",
-    use: '.menu',
     filename: __filename
 },
-async (conn, mek, m, { from, quoted, pushname, reply }) => {
-    try {
-        const selectionMessage = `
-╭━━━━∙⋆⋅⋆∙━ ─┉─ • ─┉─⊷
-      *Hi 😈*  *${pushname}*
-      
-    *Command List*
-╰━━━━∙⋆⋅⋆∙━ ─┉─ • ─┉─⊷
+async(conn, mek, m,{from,users , quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
+try{
 
-  *╭────────────●●►*
-  *│1. DOWNLOAD MENU*
-  *│2. SEARCH MENU* 
-  *│3. AI MENU*
-  *│4. OWNER MENU*
-  *│5. GROUP MENU*
-  *│6. INFO MENU*
-  *│7. CONVERTER MENU*
-  *│8. RANDOM MENU*
-  *│9. WALLPAPERS MENU*
-  *│10. OTHER MENU*
-  *╰────────────●●►*
+    const getAllUsers = () => {
+        return Array.from(users);  // Convert the Set to an array
+    };
+let totalusers = getAllUsers.length;
+let menu = {
+main: '',
+download: '',
+group: '',
+owner: '',
+convert: '',
+search: '',
+ai: '',
+fun: '',
+other: '',
+nsfw: '',
+settings: ''
+};
 
+for (let i = 0; i < commands.length; i++) {
+if (commands[i].pattern && !commands[i].dontAddCommandList) {
+menu[commands[i].category] += `┃  ${config.PREFIX}${commands[i].pattern}\n`;
+ }
+}
+
+
+let menumsg = `
+📅 ${new Date().toLocaleDateString('en-GB', { timeZone: 'Asia/Colombo' })}
+⌚ ${new Date().toLocaleTimeString('en-GB', { timeZone: 'Asia/Colombo' })}
+\
+❍ Bot Name : Qᴜᴇᴇɴ ᴇʟꜱᴀ𝗫 ᴍᴅ 
+❍ Version : ${require('../package.json').version}
+❍ RAM Usage: ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB / ${Math.round(require('os').totalmem / 1024 / 1024)}MB
+❍ Runtime: ${runtime(process.uptime())}
+❍ Platform: ${os.platform()}
+❍ Mode:  ${config.MODE}
+❍ OWNER MR NIKO | 94743595243 | 94704020146
+
+┏━━❮  ᴍᴇɴᴜ ᴀʟʟ  ❯━━━━
+
+┍❏ _𝐆𝐑𝐎𝐔𝐏 𝐌𝐄𝐍𝐔_━━━━
+${menu.group}
+┕━━━━━━━━━━━━━━━
+
+
+┍❏ _𝐒𝐄𝐓𝐓𝐈𝐍𝐆𝐒 𝐌𝐄𝐍𝐔_━━
+${menu.settings}
+┕━━━━━━━━━━━━━━━
+
+
+┍❏ _𝐒𝐄𝐀𝐑𝐂𝐇 𝐌𝐄𝐍𝐔_━━━
+${menu.search}
+
+┍❏ _𝐎𝐖𝐍𝐄𝐑 𝐌𝐄𝐍𝐔_━━━
+${menu.owner}
+┕━━━━━━━━━━━━━━━
+
+┍❏ _𝐂𝐎𝐍𝐕𝐄𝐑𝐓 𝐌𝐄𝐍𝐔_━━
+${menu.convert}
+┕━━━━━━━━━━━━━━━
+
+
+┍❏ _𝐔𝐒𝐄𝐅𝐔𝐋 𝐌𝐄𝐍𝐔_━━━
+${menu.other}
+┕━━━━━━━━━━━━━━━
+
+
+ ┍❏ _𝐋𝐎𝐆𝐎 𝐌𝐄𝐍𝐔_━━━━
+ ${menu.logo}
+ ┕━━━━━━━━━━━━━━━
+
+> Qᴜᴇᴇɴ ᴇʟꜱᴀ𝗫 ᴍᴅ ɢɪᴛ ɢᴜʙ : https://github.com/niko-boy3/ElsaX_MD
+> ᴡʜᴀᴛꜱ ᴀᴘᴘ : https://whatsapp.com/channel/0029Vb33GKr6buMK6SgaBc2j
+© ᴍᴀᴅᴇʙʏ ꜱʜᴀʀᴋ ᴛᴍ
 `;
 
-        const sentMsg = await conn.sendMessage(from, {
-            image: { url: imageUrl },
-            caption: selectionMessage,
-            contextInfo: { forwardingScore: 999, isForwarded: true },
-        }, { quoted: mek });
-
-        // පරිශීලක ප්‍රතිචාර ලබා ගැනීම
-        conn.ev.on('messages.upsert', async (msgUpdate) => {
-            const msg = msgUpdate.messages[0];
-            if (!msg.message || !msg.message.extendedTextMessage) return;
-
-            const userResponse = msg.message.extendedTextMessage.text.trim();
-            if (msg.message.extendedTextMessage.contextInfo &&
-                msg.message.extendedTextMessage.contextInfo.stanzaId === sentMsg.key.id) {
-
-                let responseText;
-
-                switch (userResponse) {
-                    case '1': // DOWNLOAD MENU
-                        responseText = `
-*╭────❒⁠⁠⁠⁠* *📥 DOWNLOADER-MENU 📥* *❒⁠⁠⁠⁠* 
-*┋* *Coming Soon*
-*╰───────────────────❒*
-
-`;
-                        break;
-                    case '2': // SEARCH MENU
-                        responseText = `
-*╭────❒⁠⁠⁠⁠* *🔎 SEARCH-MENU 🔍* *❒⁠⁠⁠⁠* 
-*┋* *tiktokstalk*
-*┋* *tiktoksearch*
-*┋* *movie*
-*┋* *Coming Soon*
-*╰───────────────────❒*
-
-`;
-                        break;
-                    case '3': // AI MENU
-                        responseText = `
-*╭────❒⁠⁠⁠⁠* *🧠 AI-MENU 🧠* *❒⁠⁠⁠⁠* 
-*┋* *ai*
-*┋* *Coming Soon*
-*╰───────────────────❒*
-
-`;
-                        break;
-                    case '4': // OWNER MENU
-                        responseText = `
-*╭────❒⁠⁠⁠⁠* *👨‍💻 OWNER-MENU 👨‍💻* *❒⁠⁠⁠⁠* 
-*┋* *update*
-*┋* *restart*
-*┋* *Coming Soon*
-*╰───────────────────❒*
-
-`;
-                        break;
-                    case '5': // GROUP MENU
-                        responseText = `
-*╭────❒⁠⁠⁠⁠* *👥 GROUP-MENU 👥* *❒⁠⁠⁠⁠* 
-*┋* *kickall*
-*┋* *Coming Soon*
-*╰───────────────────❒*
-
-`;
-                        break;
-                    case '6': // INFO MENU
-                        responseText = `
-*╭────❒⁠⁠⁠⁠* *💾 INFO-MENU 💾* *❒⁠⁠⁠⁠* 
-*┋* *alive*
-*┋* *menu*
-*┋* *ping*
-*┋* *Coming Soon*
-*╰───────────────────❒*
-
-`;
-                        break;
-                    case '7': // CONVERTER MENU
-                        responseText = `
-*╭────❒⁠⁠⁠⁠* *🔄 CONVERTER-MENU 🔄* *❒⁠⁠⁠⁠* 
-*┋* *tts2*
-*┋* *tourl*
-*┋* *Coming Soon*
-*╰───────────────────❒*
-
-`;
-                        break;
-                    case '8': // WALLPAPERS MENU
-                        responseText = `
-*╭────❒⁠⁠⁠⁠* *⛱️ RANDOM-MENU ⛱️* *❒⁠⁠⁠⁠* 
-*┋* *hack*
-*┋* *weather*
-*┋* *news*
-*┋* *hirucheck*
-*┋* *Coming Soon*
-*╰───────────────────❒*
-
-`;
-                        break;
-                    case '9': // WALLPAPER MENU
-                        responseText = `
-*╭────❒⁠⁠⁠⁠* *🏜️ WALLPAPERS-MENU 🏜️* *❒⁠⁠⁠⁠* 
-*┋* *animegirl1*
-*┋* *animegirl2*
-*┋* *animegirl3*
-*┋* *animegirl4*
-*┋* *animegirl5*
-*┋* *Coming Soon*
-*╰───────────────────❒*
-
-`;
-                        break;
-                    case '10': // OTHER MENU
-                        responseText = `
-*╭────❒⁠⁠⁠⁠* *🌐 OTHER-MENU 🌐* *❒⁠⁠⁠⁠* 
-*┋* *pair*
-*┋* *Coming Soon*
-*╰───────────────────❒*
-
-`;
-                        break;
-                    default:
-                        responseText = "*❌ Invalid option. Please enter a valid number (1-10)*";
-                }
-
-                // තෝරාගත් මෙනුව WhatsApp chat එකට යවයි.
-                await conn.sendMessage(from, { text: responseText }, { quoted: mek });
+await conn.sendMessage(
+    m.chat,
+    {
+        document: fs.readFileSync("./package.json"),
+        fileName: "🧙‍♂️ 𝐙𝐀𝐍𝐓𝐀 × 𝐌𝐃 𝐎𝐅𝐂 🧙‍♂️ ",
+        mimetype: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        fileLength: 99999999999999,
+        pageCount: 2024,
+        caption: menumsg,
+        contextInfo: {
+            forwardingScore: 999,
+            isForwarded: true,
+            forwardedNewsletterMessageInfo: {
+                newsletterName: '🧙‍♂️ 𝐙𝐀𝐍𝐓𝐀 × 𝐌𝐃 𝐎𝐅𝐂 🧙‍♂️ ',
+                newsletterJid: "120363421846535301@newsletter"
+            },
+            externalAdReply: {
+                title: "> 🧙‍♂️ 𝐙𝐀𝐍𝐓𝐀 × 𝐌𝐃 𝐎𝐅𝐂 🧙‍♂️ ",
+                body: '',
+                thumbnailUrl: 'https://files.catbox.moe/xnot7v.jpg',
+                sourceUrl: "94760879639@s.whatsapp.net",
+                mediaType: 1,
+                renderLargerThumbnail: true
             }
-        });
+        }
+    },
+    { quoted: mek }
+);
 
-    } catch (e) {
-        console.error(e);
-        reply(`*⚠ An error occurred: ${e.message}*`);
-    }
-});
+} catch(e){
+    console.log(e)
+    reply(`${e}`)
+}
+})
