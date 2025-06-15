@@ -375,9 +375,6 @@ cmd({
     }
 });
 
-////////credit by dinu
-///powerd by dtz and lod
-//dont removed credit
 
 //=================================WORKTYPE=========================================== 
 if(!isOwner && config.MODE === "private") return
