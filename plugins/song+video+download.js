@@ -1,89 +1,169 @@
-const config = require('../config');
-const { cmd } = require('../command');
-const { ytsearch, ytmp3, ytmp4 } = require('@dark-yasiya/yt-dl.js'); 
+const { cmd, commands } = require('../lib/command');
+const yts = require('yt-search');
+const { fetchJson } = require('../lib/functions');
+const ddownr = require('denethdev-ytmp3');
 
-// video
+// Function to extract the video ID from youtu.be or YouTube links
+function extractYouTubeId(url) {
+    const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:watch\?v=|embed\/|v\/|shorts\/|playlist\?list=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+    const match = url.match(regex);
+    return match ? match[1] : null;
+}
 
-cmd({ 
-    pattern: "video", 
-    alias: ["ytdl", "mp4"], 
-    react: "🎥", 
-    desc: "Download Youtube song", 
-    category: "main", 
-    use: '.song < Yt url or Name >', 
-    filename: __filename 
-}, async (conn, mek, m, { from, prefix, quoted, q, reply }) => { 
-    try { 
-        if (!q) return await reply("Please provide a YouTube URL or song name.");
-        
-        const yt = await ytsearch(q);
-        if (yt.results.length < 1) return reply("No results found!");
-        
-        let yts = yt.results[0];  
-        let apiUrl = `https://apis.davidcyriltech.my.id/download/ytmp4?url=${encodeURIComponent(yts.url)}`;
-        
-        let response = await fetch(apiUrl);
-        let data = await response.json();
-        
-        if (data.status !== 200 || !data.success || !data.result.download_url) {
-            return reply("Failed to fetch the video. Please try again later.");
-        }
-        
-        let ytmsg = `╭━━━〔 *🧙‍♂️ 𝐙𝐀𝐍𝐓𝐀 × 𝐌𝐃 𝐎𝐅𝐂 🧙‍♂️* 〕━━━┈⊷
-┇๏ *Title* -  ${yts.title}
-┇๏ *Duration* - ${yts.timestamp}
-┇๏ *Views* -  ${yts.views}
-┇๏ *Author* -  ${yts.author.name}
-┇๏ *Link* -  ${yts.url}
-╰────────────────┈⊷
-
-`;
-
-        // Send video details
-        await conn.sendMessage(from, { image: { url: data.result.thumbnail || '' }, caption: ytmsg }, { quoted: mek });
-        
-        // Send video file
-        await conn.sendMessage(from, { video: { url: data.result.download_url }, mimetype: "video/mp4" }, { quoted: mek });
-        
-        // Send document file (optional)
-        await conn.sendMessage(from, { 
-            document: { url: data.result.download_url }, 
-            mimetype: "video/mp4", 
-            fileName: `${data.result.title}.mp4`, 
-            caption: `> *${yts.title}*\n> *𝐏𝐎𝐖𝐄𝐑𝐄𝐃 𝐁𝐲 - : 𝐌𝐑 𝐒𝐔𝐑𝐀𝐍𝐆𝐀 𝐎𝐅𝐂`
-        }, { quoted: mek });
-
-    } catch (e) {
-        console.log(e);
-        reply("An error occurred. Please try again later.");
+// Function to convert any YouTube URL to a full YouTube watch URL
+function convertYouTubeLink(q) {
+    const videoId = extractYouTubeId(q);
+    if (videoId) {
+        return `https://www.youtube.com/watch?v=${videoId}`;
     }
-});  
-       
-// play
+    return q;
+}
 
-cmd({ 
-     pattern: "song", 
-     alias: ["ytdl3", "play","audio","mp3"], 
-     react: "🎧", 
-     desc: "Download Youtube song",
-     category: "main", 
-     use: '.song < Yt url or Name >', 
-     filename: __filename }, 
-     async (conn, mek, m, { from, prefix, quoted, q, reply }) => 
+cmd({
+    pattern: "song",
+    alias: "play",
+    desc: "To download songs.",
+    react: "🎵",
+    category: "download",
+    filename: __filename
+},
+async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
+    try {
+        q = convertYouTubeLink(q);
+        if (!q) return reply("*මෝඩයෝ 🤭 ඔයා කමාන්ඩ් එක විතරක් Use කරාම කෝමද මම ඔයාගෙ හිතේ තීන සින්දුව දෙන්නෙ 🤭/n>ගුටි නොකා කමාන්ඩ් එකට පස්සෙ සින්දුව Type කරනව මැට්ටා 😅*");
+        const search = await yts(q);
+        const data = search.videos[0];
+        const url = data.url;
+
+        let desc = `*🎧 𝐐𝐔𝐄𝐄𝐍 𝐑𝐀𝐒𝐇𝐔 𝐌𝐃 𝐕2 Song Dawnloder .......*
+
+● 🎧 *Title:* ${data.title}
+● ⏱️ *Duration:* ${data.timestamp}
+● 📅 *Uploaded:* ${data.ago}
+● 👁️ *Views:* ${data.views}
+
+◖┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉◗
+*DAWNLOAD OPTIONS ⬇️*
+◖┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉┉◗
+
+
+│ 1️⃣ 🎧 *Audio*          
+│ 2️⃣ 📄 *Document*       
+│ 3️⃣ 🎙️ *Voice Note*
+
+*මෝඩයෙක් නොවී උඩින් නම්බර් එකක් සිලෙක්ට් කරනව පිස්සො 🤭😩*
+
+> 𝙿𝙾𝚆𝙴𝚁𝙳 𝙱𝚈 𝐐𝐔𝐄𝐄𝐍 𝐑𝐀𝐒𝐇𝐔 𝐌𝐃 𝙾𝙵𝙲 🫟
+`;
+let info = `
+> 𝙿𝙾𝚆𝙴𝚁𝙳 𝙱𝚈 𝐐𝐔𝐄𝐄𝐍 𝐑𝐀𝐒𝐇𝐔 𝐌𝐃 𝙾𝙵𝙲 🫟
+ `;   
+const sentMsg = await conn.sendMessage(from, {
+            image: { url: data.thumbnail},
+            caption: desc,
+  contextInfo: {
+                mentionedJid: ['94727319036@s.whatsapp.net'], // specify mentioned JID(s) if any
+                groupMentions: [],
+                forwardingScore: 1,
+                isForwarded: true,
+                forwardedNewsletterMessageInfo: {
+                    newsletterJid: '120363292101892024@newsletter',
+                    newsletterName: "𝐐𝐔𝐄𝐄𝐍 𝐑𝐀𝐒𝐇𝐔 𝐌𝐃 𝙾𝙵𝙲 🫟",
+                    serverMessageId: 999
+                }
+            }
+     }, {quoted: mek});
      
-     { try { if (!q) return await reply("Please provide a YouTube URL or song name.");
+     const messageID = sentMsg.key.id; // Save the message ID for later reference
 
-const yt = await ytsearch(q);
-    if (yt.results.length < 1) return reply("No results found!");
-    
-    let yts = yt.results[0];  
-    let apiUrl = `https://apis.davidcyriltech.my.id/youtube/mp3?url=${encodeURIComponent(yts.url)}`;
-    
-    let response = await fetch(apiUrl);
-    let data = await response.json();
-    
-    if (data.status !== 200 || !data.success || !data.result.downloadUrl) {
-        return reply("Failed to fetch the audio. Please try again later.");
+
+        // Listen for the user's response
+        conn.ev.on('messages.upsert', async (messageUpdate) => {
+            const mek = messageUpdate.messages[0];
+            if (!mek.message) return;
+            const messageType = mek.message.conversation || mek.message.extendedTextMessage?.text;
+            const from = mek.key.remoteJid;
+            const sender = mek.key.participant || mek.key.remoteJid;
+
+            // Check if the message is a reply to the previously sent message
+            const isReplyToSentMsg = mek.message.extendedTextMessage && mek.message.extendedTextMessage.contextInfo.stanzaId === messageID;
+
+            if (isReplyToSentMsg) {
+                // React to the user's reply (the "1" or "2" message)
+
+                // React to the upload (sending the file)
+                
+
+                if (messageType === '1') {
+                    // Handle option 1 (Audio File)
+                    await conn.sendMessage(from, { react: { text: '⬇️', key: mek.key } });
+                const result = await ddownr.download(url, 'mp3'); // Download in mp3 format
+                const downloadLink = result.downloadUrl;
+                await conn.sendMessage(from, { react: { text: '⬆️', key: mek.key } });  
+                    await conn.sendMessage(from, { 
+                        audio: { url: downloadLink }, 
+                        mimetype: "audio/mpeg" ,
+                        contextInfo: {
+                            externalAdReply: {
+                                title: data.title,
+                                body: data.videoId,
+                                mediaType: 1,
+                                sourceUrl: data.url,
+                                thumbnailUrl: data.thumbnail, // This should match the image URL provided above
+                                renderLargerThumbnail: true,
+                                showAdAttribution: true
+                            }
+                        }
+                    
+                    }, { quoted: mek });
+                    await conn.sendMessage(from,);
+                
+                } else if (messageType === '2') {
+                    // Handle option 2 (Document File)
+                    await conn.sendMessage(from, { react: { text: '⬇️', key: mek.key } });
+                    const result = await ddownr.download(url, 'mp3'); // Download in mp3 format
+                    const downloadLink = result.downloadUrl;
+                await conn.sendMessage(from, { react: { text: '⬆️', key: mek.key } });
+                    await conn.sendMessage(from, {
+                        document: { url: downloadLink},
+                        mimetype: "audio/mp3",
+                        fileName: `${data.title}.mp3`, // Ensure `img.allmenu` is a valid image URL or base64 encoded image
+                        caption: info
+                                            
+                      }, { quoted: mek });
+                      await conn.sendMessage(from, );
+                     } else if (messageType === '3') {
+                     await conn.sendMessage(from, { react: { text: '⬇️', key: mek.key } });
+                    const result = await ddownr.download(url, 'mp3'); // Download in mp3 format
+                    const downloadLink = result.downloadUrl;
+                await conn.sendMessage(from, { react: { text: '⬆️', key: mek.key } });  
+                    await conn.sendMessage(from, { 
+                        audio: { url: downloadLink }, 
+                        mimetype: "audio/mpeg" ,
+                        ptt: "true" ,
+                        contextInfo: {
+                            externalAdReply: {
+                                title: data.title,
+                                body: data.videoId,
+                                mediaType: 1,
+                                sourceUrl: data.url,
+                                thumbnailUrl: data.thumbnail, // This should match the image URL provided above
+                                renderLargerThumbnail: true,
+                                showAdAttribution: true
+                            }
+                        }
+                    
+                    }, { quoted: mek });
+                    await conn.sendMessage(from,); 
+                }
+            }
+        });
+        
+ } catch (e) {
+        console.log(e);
+        reply(`${e}`);
+    }
+});
     }
     
     let ytmsg = `╭━━━〔 *🧙‍♂️ 𝐙𝐀𝐍𝐓𝐀 × 𝐌𝐃 𝐎𝐅𝐂 🧙‍♂️* 〕━━━┈⊷
