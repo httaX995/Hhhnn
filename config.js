@@ -1,15 +1,36 @@
-const fs = require('fs');
-if (fs.existsSync('config.env')) require('dotenv').config({ path: './config.env' });
-
-function convertToBool(text, fault = 'true') {
-    return text === fault ? true : false;
-}
 module.exports = {
-SESSION_ID: process.env.SESSION_ID || "Put the session-id here.", // ඔයාගේ session id එක දාන්න
-MONGODB: process.env.MONGODB || "Put the mongodb url here.", // ඔයාගේ mongodb url එක දාන්න
-ALIVE_IMG: process.env.ALIVE_IMG || "YOUR PHOTO URL",
-BOT_NAME: process.env.BOT_NAME || "MD",
-LANG: process.env.BOT_LANG || 'EN' ,
-OMDB_API_KEY: process.env.OMDB_API_KEY || "76cb7f39",
-DELETEMSGSENDTO : process.env.DELETEMSGSENDTO === undefined ? '' : process.env.DELETEMSGSENDTO,
+  "ALIVE_IMG": "https://raw.githubusercontent.com/RASH-DATA/ANJU-DATA/refs/heads/main/WhatsApp%20Image%202024-09-08%20at%209.00.17%20PM.jpeg",
+  "PREFIX": ".",
+  "AUTO_READ_STATUS": true,
+  "MODE": "public",
+  "BOT_NUMBER": "94764972683",
+  "OMDB_API_KEY": "76cb7f39",
+  "READ_CMD": true,
+  "AUTO_VOICE": false,
+  "AUTO_STICKER": false,
+  "AUTO_REPLY": true,
+  "AUTO_REACT": false,
+  "WELCOME": true,
+  "ANTI_BAD": false,
+  "ANTI_BOT": true,
+  "ANTI_LINK": false,
+  "ANTI_CALL": false,
+  "ANTI_DELETE": true,
+  "ALLWAYS_ONLINE": true,
+  "MOROCCO_BLOCK": true,
+  "BTN_MSG": false,
+  "OWNER_NAME": "𝗖𝗬𝗕𝗘𝗥 𝗗𝗜𝗡𝗨 𝗜𝗗",
+  "NEWS_JID": "1234567890@s.whatsapp.net",
+  "MOVIE_JID": "120363367650594508@g.us",
+  "ANIME_JID": "120363367650594508@g.us",
+  "AUTO_TYPING": false,
+  "AUTO_RECORDING": true,
+  "AUTO_NEWS": false,
+  "OWNER_REACT": false,
+  "EMOJI": "🏷",
+  "AI_MODE": true,
+  "BANNED": [],
+  "SUDO": [
+    "94764972683"
+  ]
 };
