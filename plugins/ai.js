@@ -1,46 +1,19 @@
-const { cmd, commands } = require("../lib/command");
-const { fetchJson } = require("../lib/functions");
-if (!cmd) return;
-cmd(
-  {
-    pattern: "aig",
-    desc: "Ai chat with gemini.",
-    react: "🤖",
-    category: "ai",
-    use: ".gemini whats your name",
-    filename: __filename,
-  },
-  async (
-    conn,
-    mek,
-    m,
-    {
-      from,
-      quoted,
-      body,
-      isCmd,
-      command,
-      args,
-      q,
-      isGroup,
-      sender,
-      senderNumber,
-      botNumber2,
-      botNumber,
-      pushname,
-      isMe,
-      isOwner,
-      groupMetadata,
-      groupName,
-      participants,
-      groupAdmins,
-      isBotAdmins,
-      isAdmins,
-      reply,
-    }
-  ) => {
-    try {
-      if (!q) return reply(`Give me a quary`);
-      let res = await fetchJson(
-        `https://api.siputzx.my.id/api/ai/gemini-pro?content=${q}`
-      );
+const config = require('../config')
+const {cmd , commands} = require('../command')
+const { fetchJson } = require('../lib/functions')
+cmd({
+    pattern: "ai",
+    react: "✨",
+    desc: "ai chat",
+    category: "main",
+    filename: __filename
+},
+async(conn, mek, m,{from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
+try{
+let data = await fetchJson(`https://api.openai.com/v1/chat/completions?q=${q}`)
+return reply(`${data.data}`)
+}catch(e){
+console.log(e)
+reply(`${e}`)
+}
+})
