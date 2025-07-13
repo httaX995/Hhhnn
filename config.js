@@ -1,9 +1,9 @@
 module.exports = {
   "ALIVE_IMG": "https://raw.githubusercontent.com/RASH-DATA/ANJU-DATA/refs/heads/main/WhatsApp%20Image%202024-09-08%20at%209.00.17%20PM.jpeg",
   "PREFIX": ".",
-  "AUTO_READ_STATUS": true,
+  "AUTO_READ_STATUS": false,
   "MODE": "public",
-  "BOT_NUMBER": "94764972683",
+  "BOT_NUMBER": "94779510013",
   "OMDB_API_KEY": "76cb7f39",
   "READ_CMD": true,
   "AUTO_VOICE": false,
@@ -31,6 +31,6 @@ module.exports = {
   "AI_MODE": true,
   "BANNED": [],
   "SUDO": [
-    "94764972683"
+    "94779510013"
   ]
 };
